@@ -196,6 +196,7 @@ void rt2800_process_rxwi(struct queue_entry *entry, struct rxdone_entry_desc *tx
 void rt2800_txdone_entry(struct queue_entry *entry, u32 status, __le32 *txwi,
 			 bool match);
 
+bool rt2800_txstatus_pending(struct rt2x00_dev *rt2x00dev);
 void rt2800_write_beacon(struct queue_entry *entry, struct txentry_desc *txdesc);
 void rt2800_clear_beacon(struct queue_entry *entry);
 

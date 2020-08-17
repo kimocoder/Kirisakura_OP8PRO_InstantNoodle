@@ -9559,6 +9559,23 @@ int rt2800_set_rts_threshold(struct ieee80211_hw *hw, u32 value)
 }
 EXPORT_SYMBOL_GPL(rt2800_set_rts_threshold);
 
+/*
+ * test if there is an entry in any TX queue for which DMA is done
+ * but the TX status has not been returned yet
+ */
+bool rt2800_txstatus_pending(struct rt2x00_dev *rt2x00dev)
+{
+	struct data_queue *queue;
+
+	tx_queue_for_each(rt2x00dev, queue) {
+		if (rt2x00queue_get_entry(queue, Q_INDEX_DMA_DONE) !=
+		    rt2x00queue_get_entry(queue, Q_INDEX_DONE))
+			return true;
+	}
+	return false;
+}
+EXPORT_SYMBOL_GPL(rt2800_txstatus_pending);
+
 int rt2800_conf_tx(struct ieee80211_hw *hw,
 		   struct ieee80211_vif *vif, u16 queue_idx,
 		   const struct ieee80211_tx_queue_params *params)

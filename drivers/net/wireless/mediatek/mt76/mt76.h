@@ -291,7 +291,7 @@ enum mt76u_out_ep {
 #define MCU_RESP_URB_SIZE	1024
 struct mt76_usb {
 	struct mutex usb_ctrl_mtx;
-	u8 data[32];
+	u8 data[128];
 
 	struct tasklet_struct rx_tasklet;
 	struct tasklet_struct tx_tasklet;
