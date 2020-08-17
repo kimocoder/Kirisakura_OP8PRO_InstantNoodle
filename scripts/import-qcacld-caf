@@ -1,0 +1,12 @@
+#!/bin/bash
+
+CAF_TAG=LA.UM.8.12.r1-13700-sm8250.0
+
+git remote add qcacld-3.0 https://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0
+git fetch qcacld-3.0 $CAF_TAG
+git merge -s ours --no-commit --allow-unrelated-histories FETCH_HEAD
+git read-tree --prefix=drivers/staging/qcacld-3.0 -u FETCH_HEAD
+git commit
+
+git fetch qcacld-3.0 $CAF_TAG
+git merge -X subtree=drivers/staging/qcacld-3.0 FETCH_HEAD
